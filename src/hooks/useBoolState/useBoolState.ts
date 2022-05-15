@@ -10,8 +10,6 @@ type BoolStateType = [
     }
 ]
 
-function useBoolState(): BoolStateType
-
 function useBoolState(initState?: boolean | (() => boolean)): BoolStateType {
     const [value, setValue] = useState<boolean>(initState ?? false)
 
@@ -30,17 +28,22 @@ function useBoolState(initState?: boolean | (() => boolean)): BoolStateType {
         []
     )
 
+    const actions = useMemo(
+        () => ({
+            set: setValue,
+            t: setTrue,
+            f: setFalse,
+            toggle, 
+        }),
+        []
+    )
+
     const returnObject: BoolStateType = useMemo(
         () => [
             value,
-            {
-                set: setValue,
-                t: setTrue,
-                f: setFalse,
-                toggle, 
-            }
+            actions,
         ],
-        [value, setTrue, setFalse, toggle]
+        [value]
     )
 
     return returnObject

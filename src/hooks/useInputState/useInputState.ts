@@ -26,16 +26,21 @@ function useInputState(initialState?: string | (() => string), onAfterChange?: R
         []
     )
 
+    const props = useMemo(
+        () => ({
+            value,
+            onChange: handleChange
+        }),
+        [value, handleChange]
+    )
+
     const returnObject: InputStateType = useMemo(
         () => [
             value,
-            {
-                value,
-                onChange: handleChange
-            },
+            props,
             setValue
         ],
-        [value, handleChange]
+        [value, props]
     )
 
     return returnObject
