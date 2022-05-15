@@ -9,12 +9,6 @@ type InputStateType = [
     Dispatch<SetStateAction<string>>
 ]
 
-function useInputState(): InputStateType
-
-function useInputState(initialState?: string | (() => string)): InputStateType
-
-function useInputState(initialState?: string | (() => string), onAfterChange?: React.ChangeEventHandler<HTMLInputElement>): InputStateType
-
 function useInputState(initialState?: string | (() => string), onAfterChange?: React.ChangeEventHandler<HTMLInputElement>): InputStateType {
     const [value, setValue] = useState<string>(initialState ?? '')
 
