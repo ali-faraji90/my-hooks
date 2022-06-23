@@ -1,13 +1,15 @@
 import React, { useCallback, useMemo, useState } from 'react'
 
+export type BoolStateActions = {
+    set: React.Dispatch<React.SetStateAction<boolean>>,
+    toggle: () => void,
+    on: () => void,
+    off: () => void,
+}
+
 type BoolStateType = [
     boolean,
-    {
-        set: React.Dispatch<React.SetStateAction<boolean>>,
-        toggle: () => void,
-        t: () => void,
-        f: () => void,
-    }
+    BoolStateActions
 ]
 
 function useBoolState(initState?: boolean | (() => boolean)): BoolStateType {
@@ -31,8 +33,8 @@ function useBoolState(initState?: boolean | (() => boolean)): BoolStateType {
     const actions = useMemo(
         () => ({
             set: setValue,
-            t: setTrue,
-            f: setFalse,
+            on: setTrue,
+            off: setFalse,
             toggle, 
         }),
         []

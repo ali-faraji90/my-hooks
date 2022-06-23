@@ -17,7 +17,7 @@ function useInputState(initialState?: string | (() => string), onAfterChange?: R
             setValue(e.target.value)
             onAfterChange?.(e)
         },
-        []
+        [onAfterChange]
     )
 
     const props = useMemo(

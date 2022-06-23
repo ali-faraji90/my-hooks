@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import useBoolState from '../useBoolState';
+import { BoolStateActions } from '../useBoolState/useBoolState';
 
 type CheckedInputStateType = [
     boolean,
@@ -7,16 +8,11 @@ type CheckedInputStateType = [
         checked: boolean;
         onChange: React.ChangeEventHandler<HTMLInputElement>;
     },
-    {
-        set: React.Dispatch<React.SetStateAction<boolean>>,
-        toggle: () => void,
-        t: () => void,
-        f: () => void,
-    }
+    BoolStateActions
 ]
 
 function useCheckedInputState(initChecked?: boolean | (() => boolean), onAfterChange?: React.ChangeEventHandler<HTMLInputElement>): CheckedInputStateType {
-    const [checked, actions] = useBoolState(initChecked ?? false)
+    const [checked, actions] = useBoolState()
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
         (e) => {

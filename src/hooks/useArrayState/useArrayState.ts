@@ -66,7 +66,7 @@ function useArrayState(initState?: any[] | (() => any[])) {
             removeItem,
             edit,
         }),
-        [add, remove]
+        []
     )
 
     const returnObject: ArrayStateType = useMemo(
